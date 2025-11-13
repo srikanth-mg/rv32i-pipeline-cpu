@@ -65,7 +65,7 @@ alu.sv          - ALU implementation
 program.mem     - Test program (hex)
 tb_rv32_top.sv  - Testbench
 
-##📝 Explanation of program.mem file:
+## 📝 Explanation of program.mem file:
 
 The default test program performs:
 x1 = 5
@@ -88,7 +88,7 @@ Register file write-back
 1. Add all `.sv` files and `program.mem` into Vivado or any SystemVerilog simulator.
 2. Make sure `inst_mem.sv` loads the file correctly
 
-🚀 Future Improvements
+## 🚀 Future Improvements
 
 Potential extensions:
 Hazard detection (stalling on load-use)
@@ -98,7 +98,7 @@ Pipeline flush logic for jumps
 Support for more RV32I instructions
 CSR support
 
-##📜 License
+## 📜 License
 
 This project is for educational and research purposes.
 You may modify or extend the design freely.
