@@ -55,15 +55,15 @@ All instructions follow the RISC-V uncompressed 32-bit format.
 
 ## 📁 File Structure
 
-- rv32_top.sv     - Main CPU integrating all pipeline stages
-- rv32_pkg.sv     - Type definitions, structs, ALU op enums
-- instr_mem.sv    - Instruction ROM using $readmemh
-- data_mem.sv     - Data memory
-- regfile.sv      - 32x32(256kB) register file with x0 hardwired to zero
-- control_unit.sv - Decodes opcode / funct3 / funct7
-- alu.sv          - ALU implementation
-- program.mem     - Test program (hex)
-- tb_rv32_top.sv  - Testbench
+- `rv32_top.sv`     - Main CPU integrating all pipeline stages
+- `rv32_pkg.sv`     - Type definitions, structs, ALU op enums
+- `instr_mem.sv`    - Instruction ROM using $readmemh
+- `data_mem.sv`     - Data memory
+- `regfile.sv`      - 32x32(256kB) register file with x0 hardwired to zero
+- `control_unit.sv` - Decodes opcode / funct3 / funct7
+- `alu.sv`          - ALU implementation
+- `program.mem`     - Test program (hex)
+- `tb_rv32_top.sv`  - Testbench
 
 ## 📝 Explanation of program.mem file:
 
