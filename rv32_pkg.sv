@@ -38,7 +38,8 @@ logic [31:0] pc_plus4, rs1_data, rs2_data, imm;
 logic [4:0] rs1, rs2, rd;
 logic       mem_write, mem_read, alu_src, mem_to_reg, reg_write, branch, jal, jalr;
 logic [3:0] alu_ctrl; 
-} idex_t;
+logic [6:0] opcode;
+} idex_t
 
 typedef struct packed{
 logic       mem_write, mem_read, mem_to_reg, reg_write, jal, jalr;
