@@ -18,8 +18,6 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
-
 module data_mem(
   input  logic        clk,
   input  logic [31:2] addr,    // word aligned
@@ -30,7 +28,7 @@ module data_mem(
   logic [31:0] mem [0:255];
 
   always_ff @(posedge clk) begin
-    if (we) mem[addr[9:2]] <= wd; // for SW operation
+    if (we) mem[addr] <= wd; // for SW operation
   end
-  assign rd = mem[addr[9:2]];  //for LW operation
+  assign rd = mem[addr];  //for LW operation
 endmodule
