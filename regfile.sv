@@ -18,14 +18,12 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
-
 module regfile(
 input logic clk,
 input logic [4:0] ra1, ra2, wa,
 input logic we,
 input logic [31:0] wd,
-input logic [31:0] rd1, rd2
+output logic [31:0] rd1, rd2
     );
     
     logic [31:0] x[31:0];
