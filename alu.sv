@@ -18,8 +18,6 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
-
 module alu(
 input logic [31:0] rs1_data,rs2_data,
 input logic [3:0] alu_ctrl,
@@ -27,6 +25,7 @@ output logic [31:0] rd
     );
     
     always_comb begin
+    rd = 32'd0;
     unique case (alu_ctrl)
       4'b0000: begin rd = rs1_data + rs2_data;  end                         // ADD/ADDI
       4'b1000: begin rd = rs1_data - rs2_data;   end                        // SUB
