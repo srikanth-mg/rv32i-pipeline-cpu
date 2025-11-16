@@ -18,24 +18,29 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
-
 module tb_rv32_top;
-  logic clk = 0, rst_n = 0;
-  rv32_top R1(.clk(clk), .rst_n(rst_n));
 
-  always begin 
-  #5 clk = ~clk;
- end
- 
+  logic clk   = 0;
+  logic rst_n = 0;
+
+  // DUT instance
+  rv32_top dut (
+    .clk  (clk),
+    .rst_n(rst_n)
+  );
+
+  // Clock: 10 ns period
+  always #5 clk = ~clk;
+
   initial begin
-    $display("RV32I 5-stage (SV) smoke test");
+    $display("RV32I 5-stage (SV) - forwarding test");
     rst_n = 0;
-    #40;            // wait a few cycles
-    rst_n = 1;      // deassert reset (release
-    repeat (200) @(posedge clk);
-    $display("DONE");
+    repeat (5) @(posedge clk);          // hold reset low for a few cycles
+    rst_n = 1;    // release reset
+   repeat (200) @(posedge clk);         // let it run for a while
+    $display("Simulation finished");
     $finish;
   end
+
 endmodule
 
