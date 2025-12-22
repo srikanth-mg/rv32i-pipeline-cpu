@@ -1,46 +1,45 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 11/12/2025 10:29:14 PM
-// Design Name: 
-// Module Name: tb_rv32_top
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
+`timescale 1ns/1ps
+
 module tb_rv32_top;
+    logic clk;
+    logic rst_n;
 
-  logic clk   = 0;
-  logic rst_n = 0;
+    // DUT
+    rv32_top dut (
+        .clk  (clk),
+        .rst_n(rst_n)
+    );
 
-  // DUT instance
-  rv32_top dut (
-    .clk  (clk),
-    .rst_n(rst_n)
-  );
+    // Clock: 100MHz-ish (10ns period)
+    initial clk = 1'b0;
+    always #5 clk = ~clk;
 
-  // Clock: 10 ns period
-  always #5 clk = ~clk;
-
-  initial begin
-    $display("RV32I 5-stage (SV) - forwarding test");
-    rst_n = 0;
-    repeat (5) @(posedge clk);          // hold reset low for a few cycles
-    rst_n = 1;    // release reset
-   repeat (200) @(posedge clk);         // let it run for a while
-    $display("Simulation finished");
-    $finish;
+    // VCD dump (Verilator --trace will honor this)
+    initial begin
+        $dumpfile("dump.vcd");
+        $dumpvars(0, tb_rv32_top);
+    end
+    
+    // --- WB / Regfile commit trace ---
+always_ff @(posedge clk) begin
+  if (rst_n) begin
+    if (dut.RF1.we && (dut.RF1.wa != 0)) begin
+      $display("[%0t] WB COMMIT: x%0d <= 0x%08h (%0d)",
+               $time, dut.RF1.wa, dut.RF1.wd, dut.RF1.wd);
+    end
   end
+end
 
+
+    // Reset + run
+    initial begin
+        rst_n = 1'b0;
+        repeat (5) @(posedge clk);
+        rst_n = 1'b1;
+
+        // Run enough cycles for lw/add/addi to flow through pipeline
+        repeat (80) @(posedge clk);
+        $display("SIM DONE");
+        $finish;
+    end
 endmodule
-
