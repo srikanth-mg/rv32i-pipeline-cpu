@@ -1,23 +1,5 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 11/12/2025 03:22:39 PM
-// Design Name: 
-// Module Name: rv32_pkg
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-/////////////////////////////////////////////////////////////////////////////////
+
 package rv32_pkg;
 
 typedef enum logic [3:0]{
@@ -38,19 +20,18 @@ logic [31:0] pc_plus4, rs1_data, rs2_data, imm;
 logic [4:0] rs1, rs2, rd;
 logic       mem_write, mem_read, alu_src, mem_to_reg, reg_write, branch, jal, jalr;
 logic [3:0] alu_ctrl; 
-logic [6:0] opcode;
-} idex_t
+} idex_t;
 
 typedef struct packed{
 logic       mem_write, mem_read, mem_to_reg, reg_write, jal, jalr;
 logic [31:0] alu_result, pc_plus4, rs2_data;
-logic [31:0] rd;
+logic [4:0]  rd;
 } exmem_t;
 
 typedef struct packed{
 logic reg_write, jal, jalr, mem_to_reg;
 logic [31:0] alu_result, pc_plus4, mem_rdata;
-logic [31:0] rd;
+logic [4:0]  rd;
 } memwb_t;
 
  // Quick field helpers
@@ -99,7 +80,6 @@ endfunction
  endfunction
  
 endpackage
-
 
 
 
